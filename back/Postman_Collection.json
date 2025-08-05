@@ -1,0 +1,726 @@
+{
+	"info": {
+		"_postman_id": "12345678-1234-1234-1234-123456789012",
+		"name": "tp-integrador",
+		"description": "tp-integrador",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "autenticar",
+			"item": [
+				{
+					"name": "registrar",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"first_name\": \"Juan\",\n    \"last_name\": \"Pérez\",\n    \"username\": \"juan.perez@email.com\",\n    \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/user/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"juan.perez@email.com\",\n    \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/user/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"login"
+							]
+						}
+					},
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    const response = pm.response.json();",
+									"    if (response.token) {",
+									"        pm.environment.set('auth_token', response.token);",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "public-events",
+			"item": [
+				{
+					"name": "listado",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/event?page=1&limit=10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"event"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscar-por-nombre",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/event?name=concierto",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"event"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "concierto"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscar-por-fecha",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/event?startdate=2024-12-01",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"event"
+							],
+							"query": [
+								{
+									"key": "startdate",
+									"value": "2024-12-01"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscar-por-tag",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/event?tag=rock",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"event"
+							],
+							"query": [
+								{
+									"key": "tag",
+									"value": "rock"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "obtener-por-id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/event/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"event",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "event-autentication)",
+			"item": [
+				{
+					"name": "crear-evento",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Concierto de Rock\",\n    \"description\": \"Un increíble concierto de rock en vivo\",\n    \"id_event_location\": 1,\n    \"start_date\": \"2024-12-15T20:00:00.000Z\",\n    \"duration_in_minutes\": 120,\n    \"price\": 50000,\n    \"enabled_for_enrollment\": \"1\",\n    \"max_assistance\": 1000,\n    \"tags\": [\"rock\", \"música\", \"concierto\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/event",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"event"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "actualizar",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Concierto de Rock Actualizado\",\n    \"description\": \"Un increíble concierto de rock en vivo con nueva descripción\",\n    \"price\": 60000\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/event/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"event",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "eliminar",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/event/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"event",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "inscriptions",
+			"item": [
+				{
+					"name": "inscripcion-eventos",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/event/1/enrollment",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"event",
+								"1",
+								"enrollment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cancelar",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/event/1/enrollment",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"event",
+								"1",
+								"enrollment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscar-participantes",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/event/1/participants",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"event",
+								"1",
+								"participants"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ubications",
+			"item": [
+				{
+					"name": "listado-ubi",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/event-location",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"event-location"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscar-ubi-por-id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/event-location/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"event-location",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "crear-ubi",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Estadio Principal\",\n    \"full_address\": \"Av. Libertador 123, Buenos Aires\",\n    \"id_location\": 1,\n    \"max_capacity\": 50000,\n    \"latitude\": \"-34.6037\",\n    \"longitude\": \"-58.3816\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/event-location",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"event-location"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "actualizar-ubi",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Estadio Principal Actualizado\",\n    \"max_capacity\": 55000\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/event-location/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"event-location",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "eiminar-ubi",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/event-location/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"event-location",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "specific-search",
+			"item": [
+				{
+					"name": "buscar-por-nombre-especifico",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/events/name/concierto",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"events",
+								"name",
+								"concierto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscar-por-fecha-especifico",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/events/startdate/2024-12-01",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"events",
+								"startdate",
+								"2024-12-01"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscar-por-tag-especifico",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/events/tag/rock",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"events",
+								"tag",
+								"rock"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "prueba-error",
+			"item": [
+				{
+					"name": "login-invalido",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"usuario.inexistente@email.com\",\n    \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/user/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "email-invalido",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"first_name\": \"Juan\",\n    \"last_name\": \"Pérez\",\n    \"username\": \"email-invalido\",\n    \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/user/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "crear-sin-auth",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Evento sin Auth\",\n    \"description\": \"Este evento no debería crearse\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/event",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"event"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "evento-inexistente",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/event/999999",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"event",
+								"999999"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:3000",
+			"type": "string"
+		},
+		{
+			"key": "auth_token",
+			"value": "",
+			"type": "string"
+		}
+	]
+} 
