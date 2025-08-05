@@ -2,16 +2,16 @@ import pkg from 'pg';
 import { StatusCodes } from 'http-status-codes';
 import config from '../../configs/db-configs.js';
 
-const { Pool } = pkg;
-const pool = new Pool(config);
+let { Pool } = pkg;
+let pool = new Pool(config);
 
-export const getUserEventLocations = async (req, res) => {
-const userId = req.user.id;
-const { page = 1, limit = 15 } = req.query;
-  const offset = (page - 1) * limit;
+export let getUserEventLocations = async (req, res) => {
+let userId = req.participant.id;
+let { page = 1, limit = 15 } = req.query;
+  let offset = (page - 1) * limit;
 
     try {
-        const result = await pool.query(`
+        let result = await pool.query(`
             SELECT 
                 el.*, l.name as locality_name, l.latitude as locality_latitude, l.longitude as locality_longitude,
                 p.name as province_name, p.full_name as province_full_name
@@ -23,7 +23,7 @@ const { page = 1, limit = 15 } = req.query;
             LIMIT $2 OFFSET $3
         `, [userId, limit, offset]);
 
-        const locations = result.rows.map(row => ({
+        let locations = result.rows.map(row => ({
             id: row.id,
             id_location: row.id_location,
             name: row.name,
@@ -44,10 +44,10 @@ const { page = 1, limit = 15 } = req.query;
             }
         }));
 
-        const countResult = await pool.query('SELECT COUNT(*) FROM Event_Locations WHERE id_creator_user = $1', [userId]);
-        const total = parseInt(countResult.rows[0].count);
+        let countResult = await pool.query('SELECT COUNT(*) FROM Event_Locations WHERE id_creator_user = $1', [userId]);
+        let total = parseInt(countResult.rows[0].count);
 
-        const nextPage = offset + limit < total ? page + 1 : null;
+        let nextPage = offset + limit < total ? page + 1 : null;
 
         res.status(StatusCodes.OK).json({
             collection: locations,
@@ -68,12 +68,12 @@ const { page = 1, limit = 15 } = req.query;
     }
 };
 
-export const getEventLocationById = async (req, res) => {
-    const { id } = req.params;
-    const userId = req.user.id;
+export let getEventLocationById = async (req, res) => {
+    let { id } = req.params;
+    let userId = req.participant.id;
 
     try {
-        const result = await pool.query(`
+        let result = await pool.query(`
             SELECT 
             el.*, l.name as locality_name, l.latitude as locality_latitude, l.longitude as locality_longitude,
                 p.name as province_name, p.full_name as province_full_name
@@ -90,9 +90,9 @@ export const getEventLocationById = async (req, res) => {
             });
         }
 
-        const location = result.rows[0];
+        let location = result.rows[0];
 
-        const locationDetail = {
+        let locationDetail = {
             id: location.id,
             id_location: location.id_location,
             name: location.name,
@@ -123,12 +123,12 @@ export const getEventLocationById = async (req, res) => {
         });
     }
 };
-export const createEventLocation = async (req, res) => {
-    const { 
+export let createEventLocation = async (req, res) => {
+    let { 
         id_location, name, full_address, max_capacity, 
         latitude, longitude 
     } = req.body;
-    const userId = req.user.id;
+    let userId = req.participant.id;
     try {
         if (!name || name.length < 3) {
             return res.status(StatusCodes.BAD_REQUEST).json({
@@ -150,7 +150,7 @@ export const createEventLocation = async (req, res) => {
             });
         }
 
-    const locationResult = await pool.query('SELECT id FROM Locations WHERE id = $1', [id_location]);
+    let locationResult = await pool.query('SELECT id FROM Locations WHERE id = $1', [id_location]);
 
         if (locationResult.rowCount === 0) {
             return res.status(StatusCodes.BAD_REQUEST).json({
@@ -158,7 +158,7 @@ export const createEventLocation = async (req, res) => {
                 message: 'La ubicación no existe'
             });
         }
-        const result = await pool.query(`
+        let result = await pool.query(`
             INSERT INTO Event_Locations (id_location, name, full_address, max_capacity, 
                                        latitude, longitude, id_creator_user)
             VALUES ($1, $2, $3, $4, $5, $6, $7)
@@ -180,13 +180,13 @@ export const createEventLocation = async (req, res) => {
         });
     }
 };
-export const updateEventLocation = async (req, res) => {
-    const { id } = req.params;
-    const updateData = req.body;
-    const userId = req.user.id;
+export let updateEventLocation = async (req, res) => {
+    let { id } = req.params;
+    let updateData = req.body;
+    let userId = req.participant.id;
 
     try {
-        const checkResult = await pool.query('SELECT id_creator_user FROM Event_Locations WHERE id = $1', [id]);
+        let checkResult = await pool.query('SELECT id_creator_user FROM Event_Locations WHERE id = $1', [id]);
         if (checkResult.rowCount === 0) {
             return res.status(StatusCodes.NOT_FOUND).json({
                 success: false,
@@ -220,8 +220,8 @@ export const updateEventLocation = async (req, res) => {
                 message: 'capacidad maxima debe srr mayor a cero'
             });
         }
-        const updateFields = [];
-        const values = [];
+        let updateFields = [];
+        let values = [];
         let paramCount = 0;
 
         Object.keys(updateData).forEach(key => {
@@ -240,7 +240,7 @@ export const updateEventLocation = async (req, res) => {
     paramCount++;
         values.push(id);
 
-        const updateQuery = `UPDATE Event_Locations SET ${updateFields.join(', ')} WHERE id = $${paramCount}`;
+        let updateQuery = `UPDATE Event_Locations SET ${updateFields.join(', ')} WHERE id = $${paramCount}`;
         await pool.query(updateQuery, values);
 
         res.status(StatusCodes.OK).json({
@@ -257,12 +257,12 @@ export const updateEventLocation = async (req, res) => {
     }
 };
 
-export const deleteEventLocation = async (req, res) => {
-    const { id } = req.params;
-    const userId = req.user.id;
+export let deleteEventLocation = async (req, res) => {
+    let { id } = req.params;
+    let userId = req.participant.id;
 
     try {
-        const checkResult = await pool.query('SELECT id_creator_user FROM Event_Locations WHERE id = $1', [id]);
+        let checkResult = await pool.query('SELECT id_creator_user FROM Event_Locations WHERE id = $1', [id]);
 
         if (checkResult.rowCount === 0) {
             return res.status(StatusCodes.NOT_FOUND).json({
@@ -277,7 +277,7 @@ export const deleteEventLocation = async (req, res) => {
                 message: 'sin permisos para acceder'
             });
         }
-        const eventsResult = await pool.query('SELECT COUNT(*) FROM Events WHERE id_event_location = $1', [id]);
+        let eventsResult = await pool.query('SELECT COUNT(*) FROM Events WHERE id_event_location = $1', [id]);
 
         if (parseInt(eventsResult.rows[0].count) > 0) {
             return res.status(StatusCodes.BAD_REQUEST).json({

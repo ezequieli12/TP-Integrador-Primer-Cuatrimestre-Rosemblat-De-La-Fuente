@@ -22,33 +22,33 @@ export default function register({ navigation }) {
 
   const validateForm = () => {
     if (!formData.first_name || !formData.last_name || !formData.username || !formData.password) {
-      setError('completa todos los campos');
+      setError('Completa todos los campos');
       return false;
     }
 
     if (formData.first_name.length < 3) {
-      setError('debe tener 3 o mas caracteres');
+      setError('Nombre debe tener 3 o mas caracteres');
       return false;
     }
 
     if (formData.last_name.length < 3) {
-      setError('debe tener 3  o mas caracteres');
+      setError('Apellido debe tener 3  o mas caracteres');
       return false;
     }
 
     if (formData.password.length < 3) {
-      setError('debe tener 3 o mas caracteres');
+      setError('Contraseña debe tener 3 o mas caracteres');
       return false;
     }
 
     if (formData.password !== formData.confirmPassword) {
-      setError('no coinciden');
+      setError('No coinciden las contraseñas');
       return false;
     }
 
   const emailRegex = /^[^@]+@[^@]+\.[^@]+$/;
     if (!emailRegex.test(formData.username)) {
-  setError('no es válido');
+  setError('No es válido el email');
   return false;
     }
     return true;
@@ -65,11 +65,11 @@ export default function register({ navigation }) {
 
       if (response.data.success) {
         Alert.alert(
-          'exito',
+          'Exito',
      [
        {
-        text: 'ok',
-         onPress: () => navigation.navigate('Login')
+        text: 'Ok',
+         onPress: () => navigation.navigate('login')
         }
     ]
   );
@@ -157,7 +157,7 @@ export default function register({ navigation }) {
             <MaterialIcons name="lock" size={20} color="#666" style={styles.inputIcon} />
             <TextInput
               style={styles.input}
-        placeholder="confirmar contraseña"
+        placeholder="Confirmar contraseña"
         placeholderTextColor="#999"
         secureTextEntry={!showConfirmPassword}
         value={formData.confirmPassword}
@@ -181,15 +181,15 @@ export default function register({ navigation }) {
             disabled={loading}
           >
             <Text style={styles.buttonText}>
-              {loading ? 'creando' : 'crear cuenta'}
+              {loading ? 'Creando' : 'Crear cuenta'}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity 
             style={styles.loginButton}
-            onPress={() => navigation.navigate('Login')}
+            onPress={() => navigation.navigate('login')}
           >
             <Text style={styles.loginText}>
-              tenes cuenta? <Text style={styles.loginLink}>inicar sesion</Text>
+              ¿Tenes cuenta? <Text style={styles.loginLink}>Inicar sesion</Text>
             </Text>
           </TouchableOpacity>
         </View>
@@ -201,29 +201,31 @@ export default function register({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#0F172A',
   },
   scrollContent: {
     flexGrow: 1,
     justifyContent: 'center',
-    paddingHorizontal: 20,
-    paddingVertical: 20,
+    paddingHorizontal: 25,
+    paddingVertical: 30,
   },
   header: {
     alignItems: 'center',
-    marginBottom: 30,
+    marginBottom: 35,
   },
   title: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: '#333',
-    marginTop: 10,
+    fontSize: 32,
+    fontWeight: '800',
+    color: '#FFFFFF',
+    marginTop: 15,
+    fontFamily: 'Inter-ExtraBold'
   },
   subtitle: {
-    fontSize: 16,
-    color: '#666',
-    marginTop: 5,
+    fontSize: 17,
+    color: '#94A3B8',
+    marginTop: 8,
     textAlign: 'center',
+    fontFamily: 'Inter-Regular'
   },
   form: {
     width: '100%',
@@ -231,65 +233,66 @@ const styles = StyleSheet.create({
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#fff',
-    borderRadius: 12,
-    marginBottom: 16,
-    paddingHorizontal: 15,
+    backgroundColor: '#1E293B',
+    borderRadius: 14,
+    marginBottom: 20,
+    paddingHorizontal: 18,
     shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
-    shadowRadius: 3.84,
-    elevation: 5,
+    shadowRadius: 4,
+    elevation: 3,
+    borderWidth: 1,
+    borderColor: '#334155'
   },
   inputIcon: {
-    marginRight: 10,
+    marginRight: 12,
+    color: '#64748B'
   },
   input: {
     flex: 1,
-    height: 50,
+    height: 55,
     fontSize: 16,
-    color: '#333',
+    color: '#E2E8F0',
+    fontFamily: 'Inter-Regular'
   },
   eyeIcon: {
-    padding: 5,
+    padding: 8,
   },
   button: {
-    backgroundColor: '#007AFF',
-    borderRadius: 12,
-    height: 50,
+    backgroundColor: '#3B82F6',
+    borderRadius: 14,
+    height: 55,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 10,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
+    marginTop: 15,
+    shadowColor: '#3B82F6',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.4,
+    shadowRadius: 6,
+    elevation: 8
   },
   buttonDisabled: {
-    backgroundColor: '#ccc',
+    backgroundColor: '#475569',
   },
   buttonText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: 'bold',
+    color: '#FFFFFF',
+    fontSize: 17,
+    fontWeight: '600',
+    fontFamily: 'Inter-SemiBold'
   },
   loginButton: {
-    marginTop: 20,
+    marginTop: 25,
     alignItems: 'center',
   },
   loginText: {
-    fontSize: 14,
-    color: '#666',
+    fontSize: 15,
+    color: '#94A3B8',
+    fontFamily: 'Inter-Regular'
   },
   loginLink: {
-    color: '#007AFF',
-    fontWeight: 'bold',
+    color: '#3B82F6',
+    fontWeight: '600',
+    fontFamily: 'Inter-SemiBold'
   },
-}); 
+});

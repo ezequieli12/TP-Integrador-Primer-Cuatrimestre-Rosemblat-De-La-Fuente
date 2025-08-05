@@ -1,13 +1,13 @@
 import pkg from 'pg';
 import config from '../../configs/db-configs.js';
-const { Pool } = pkg;
-const pool = new Pool(config);
+let { Pool } = pkg;
+let pool = new Pool(config);
 
 export class eventService {
     static async getAllEvents(page = 1, limit = 15, filters = {}) {
         try {
-            const offset = (page - 1) * limit;
-            const client = await pool.connect();
+            let offset = (page - 1) * limit;
+            let client = await pool.connect();
             
             let sqlQuery = `
                 SELECT 
@@ -26,7 +26,7 @@ export class eventService {
                 WHERE 1=1
             `;
             
-            const values = [];
+            let values = [];
             let paramCount = 0;
 
             if (filters.name) {
@@ -53,7 +53,7 @@ export class eventService {
             sqlQuery += ` ORDER BY e.id ASC LIMIT $${paramCount} OFFSET $${paramCount + 1}`;
             values.push(limit, offset);
 
-            const result = await client.query(sqlQuery, values);
+            let result = await client.query(sqlQuery, values);
             client.release();
             return {
                 success: true,
@@ -71,9 +71,9 @@ export class eventService {
     }
     static async getEventById(id) {
         try {
-            const client = await pool.connect();
+            let client = await pool.connect();
             
-            const sqlQuery = `
+            let sqlQuery = `
                 SELECT 
                     e.id, e.name, e.description, e.start_date, e.duration_in_minutes,
                     e.price, e.enabled_for_enrollment, e.max_assistance,
@@ -89,7 +89,7 @@ export class eventService {
                 LEFT JOIN users u ON e.id_creator_user = u.id
                 WHERE e.id = $1
             `;
-            const result = await client.query(sqlQuery, [id]);
+            let result = await client.query(sqlQuery, [id]);
             client.release();
 
             if (result.rowCount === 0) {
@@ -100,7 +100,7 @@ export class eventService {
             }
             return {
             success: true,
-                event: result.rows[0]
+                activity: result.rows[0]
             };
 
         } catch (error) {

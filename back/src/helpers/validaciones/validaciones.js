@@ -2,14 +2,14 @@ import { StatusCodes } from 'http-status-codes';
 export class validaciones {
     chequearSiExiste = async(result, nombreCampo) => {
         if (result.rowCount === 0) {
-            throw new Error(`${nombreCampo} es inexistent`);
+            throw new Error(`${nombreCampo} es inexistente`);
         }
     }
     
     isValidEmail = async(email) => {
-        const re = /^[^@]+@[^@]+\.[^@]+$/;
+        let re = /^[^@]+@[^@]+\.[^@]+$/;
     if (!email || typeof email !== 'string' || !re.test(email)) {
-            throw new Error('invalido');
+            throw new Error('Invalido');
         }
         return true;
     }

@@ -5,12 +5,12 @@ import config from '../../configs/db-configs.js';
 import { generateToken } from '../../middleware/autenticar.js';
 import { validaciones } from '../helpers/validaciones/validaciones.js';
 
-const { Pool } = pkg;
-const pool = new Pool(config);
-const validacionesInstance = new validaciones();
+let { Pool } = pkg;
+let pool = new Pool(config);
+let validacionesInstance = new validaciones();
 
-export const registerUser = async (req, res) => {
-    const { first_name, last_name, username, password } = req.body;
+export let registerUser = async (req, res) => {
+    let { first_name, last_name, username, password } = req.body;
 
     try {
         try {
@@ -24,8 +24,8 @@ return res.status(StatusCodes.BAD_REQUEST).json({
     message: error.message 
         });
     }
-        const existingUserQuery = 'SELECT id FROM Users WHERE username = $1';
-        const existingUserResult = await pool.query(existingUserQuery, [username]);
+        let existingUserQuery = 'SELECT id FROM Users WHERE username = $1';
+        let existingUserResult = await pool.query(existingUserQuery, [username]);
 
         if (existingUserResult.rowCount > 0) {
             return res.status(StatusCodes.CONFLICT).json({
@@ -34,24 +34,24 @@ return res.status(StatusCodes.BAD_REQUEST).json({
             });
         }
 
-        const hashedPassword = await bcrypt.hash(password, 10);
-        const insertQuery = `
+        let hashedPassword = await bcrypt.hash(password, 10);
+        let insertQuery = `
             INSERT INTO Users (first_name, last_name, username, password)
             VALUES ($1, $2, $3, $4)
             RETURNING id, first_name, last_name, username
         `;
-        const result = await pool.query(insertQuery, [
+        let result = await pool.query(insertQuery, [
             first_name, last_name, username, hashedPassword
         ]);
 
         res.status(StatusCodes.CREATED).json({
             success: true,
             message: 'exito',
-            user: result.rows[0]
+            participant: result.rows[0]
         });
 
     } catch (error) {
-        console.error('error:', error);
+        console.error('osjsiuh:', error);
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
             success: false,
             message: 'error intenro'
@@ -59,8 +59,8 @@ return res.status(StatusCodes.BAD_REQUEST).json({
     }
 };
 
-export const loginUser = async (req, res) => {
-    const { username, password } = req.body;
+export let loginUser = async (req, res) => {
+    let { username, password } = req.body;
 
     try {
         try {
@@ -74,8 +74,8 @@ export const loginUser = async (req, res) => {
                 token: ''
             });
         }
-        const query = 'SELECT * FROM Users WHERE username = $1';
-        const result = await pool.query(query, [username]);
+        let query = 'SELECT * FROM Users WHERE username = $1';
+        let result = await pool.query(query, [username]);
         if (result.rowCount === 0) {
             return res.status(StatusCodes.UNAUTHORIZED).json({
                 success: false,
@@ -84,8 +84,8 @@ export const loginUser = async (req, res) => {
             });
         }
 
-        const user = result.rows[0];
-        const isValidPassword = await bcrypt.compare(password, user.password);
+        let participant = result.rows[0];
+        let isValidPassword = await bcrypt.compare(password, participant.password);
 
         if (!isValidPassword) {
             return res.status(StatusCodes.UNAUTHORIZED).json({
@@ -95,7 +95,7 @@ export const loginUser = async (req, res) => {
             });
         }
 
-        const token = generateToken(user);
+        let token = generateToken(participant);
         res.status(StatusCodes.OK).json({
             success: true,
             message: 'exito',

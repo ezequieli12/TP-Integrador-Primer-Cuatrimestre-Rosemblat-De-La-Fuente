@@ -4,9 +4,9 @@ import cors from 'cors';
 import apiRoutes from './routes/api.js';
 dotenv.config();
 
-const app = express();
-const PORT = process.env.PORT || 3000;
-const corsOptions = process.env.NODE_ENV === 'production'
+let app = express();
+let PORT = process.env.PORT || 3000;
+let corsOptions = process.env.NODE_ENV === 'production'
   ? { origin: process.env.FRONTEND_URL, optionsSuccessStatus: 200 }
   : {};
 app.use(cors(corsOptions));
@@ -29,4 +29,3 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
 console.log(`servidor por puerto ${PORT}`);
 });
-

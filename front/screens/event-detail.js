@@ -116,17 +116,17 @@ const date = new Date(dateString);
 
       <View style={styles.content}>
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>descripcion</Text>
+          <Text style={styles.sectionTitle}>Descripcion</Text>
           <Text style={styles.description}>{event.description}</Text>
         </View>
 
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>info evento</Text>
+          <Text style={styles.sectionTitle}>Info Evento</Text>
           
           <View style={styles.infoItem}>
             <MaterialIcons name="event" size={20} color="#007AFF" />
             <View style={styles.infoContent}>
-              <Text style={styles.infoLabel}>fecha y hora</Text>
+              <Text style={styles.infoLabel}>Fecha y Hora</Text>
               <Text style={styles.infoValue}>{formatDate(event.start_date)}</Text>
             </View>
           </View>
@@ -134,8 +134,8 @@ const date = new Date(dateString);
           <View style={styles.infoItem}>
             <MaterialIcons name="schedule" size={20} color="#007AFF" />
             <View style={styles.infoContent}>
-              <Text style={styles.infoLabel}>duracion</Text>
-              <Text style={styles.infoValue}>{event.duration_in_minutes} minutos</Text>
+              <Text style={styles.infoLabel}>Duracion</Text>
+              <Text style={styles.infoValue}>{event.duration_in_minutes} Minutos</Text>
             </View>
           </View>
 
@@ -143,7 +143,7 @@ const date = new Date(dateString);
             <MaterialIcons name="people" size={20} color="#007AFF" />
             <View style={styles.infoContent}>
               <Text style={styles.infoLabel}>Capacidad</Text>
-              <Text style={styles.infoValue}>{event.max_assistance} personas</Text>
+              <Text style={styles.infoValue}>{event.max_assistance} Personas</Text>
             </View>
           </View>
 
@@ -163,7 +163,7 @@ const date = new Date(dateString);
         </View>
         {event.event_location && (
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>ubicacion</Text>
+            <Text style={styles.sectionTitle}>Ubicacion</Text>
             
       <View style={styles.locationCard}>
       <View style={styles.locationHeader}>
@@ -253,230 +253,278 @@ const date = new Date(dateString);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#F8FAFC',
   },
   loadingContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#F8FAFC',
   },
   loadingText: {
-    marginTop: 16,
-    fontSize: 16,
-    color: '#666',
+    marginTop: 20,
+    fontSize: 17,
+    color: '#64748B',
+    fontFamily: 'Inter-Medium'
   },
   errorContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f5f5f5',
-    padding: 20,
+    backgroundColor: '#F8FAFC',
+    padding: 30,
   },
   errorText: {
-    fontSize: 18,
-    color: '#666',
-    marginTop: 16,
+    fontSize: 19,
+    color: '#64748B',
+    marginTop: 20,
     textAlign: 'center',
+    fontFamily: 'Inter-SemiBold'
   },
   retryButton: {
-    backgroundColor: '#007AFF',
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderRadius: 8,
-    marginTop: 20,
+    backgroundColor: '#3B82F6',
+    paddingHorizontal: 24,
+    paddingVertical: 12,
+    borderRadius: 10,
+    marginTop: 25,
+    shadowColor: '#3B82F6',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 5
   },
   retryButtonText: {
-    color: '#fff',
+    color: '#FFFFFF',
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: '600',
+    fontFamily: 'Inter-SemiBold'
   },
   header: {
-    backgroundColor: '#fff',
-    padding: 20,
+    backgroundColor: '#FFFFFF',
+    padding: 25,
     borderBottomWidth: 1,
-    borderBottomColor: '#e0e0e0',
+    borderBottomColor: '#E2E8F0',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 3,
+    elevation: 2
   },
   eventName: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: 10,
+    fontSize: 26,
+    fontWeight: '700',
+    color: '#1E293B',
+    marginBottom: 12,
+    fontFamily: 'Inter-Bold'
   },
   priceContainer: {
-    backgroundColor: '#007AFF',
+    backgroundColor: '#3B82F6',
     alignSelf: 'flex-start',
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 8,
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    borderRadius: 10,
+    shadowColor: '#3B82F6',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 5
   },
   price: {
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: 'bold',
+    color: '#FFFFFF',
+    fontSize: 19,
+    fontWeight: '700',
+    fontFamily: 'Inter-Bold'
   },
   content: {
     padding: 20,
   },
   section: {
-    backgroundColor: '#fff',
-    borderRadius: 12,
-    padding: 16,
-    marginBottom: 16,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 14,
+    padding: 20,
+    marginBottom: 20,
     shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 3.84,
-    elevation: 5,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 6,
+    elevation: 3
   },
   sectionTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: 12,
+    fontSize: 19,
+    fontWeight: '700',
+    color: '#1E293B',
+    marginBottom: 15,
+    fontFamily: 'Inter-Bold',
+    borderBottomWidth: 1,
+    borderBottomColor: '#E2E8F0',
+    paddingBottom: 10
   },
   description: {
     fontSize: 16,
-    color: '#666',
-    lineHeight: 24,
+    color: '#475569',
+    lineHeight: 26,
+    fontFamily: 'Inter-Regular'
   },
   infoItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 12,
+    marginBottom: 15,
+    paddingVertical: 8
   },
   infoContent: {
-    marginLeft: 12,
+    marginLeft: 15,
     flex: 1,
   },
   infoLabel: {
-    fontSize: 12,
-    color: '#999',
-    marginBottom: 2,
+    fontSize: 13,
+    color: '#94A3B8',
+    marginBottom: 3,
+    fontFamily: 'Inter-Medium'
   },
   infoValue: {
     fontSize: 16,
-    color: '#333',
-    fontWeight: '500',
+    color: '#1E293B',
+    fontWeight: '600',
+    fontFamily: 'Inter-SemiBold'
   },
   locationCard: {
-    backgroundColor: '#f8f8f8',
-    borderRadius: 8,
-    padding: 16,
+    backgroundColor: '#F1F5F9',
+    borderRadius: 12,
+    padding: 18,
+    borderWidth: 1,
+    borderColor: '#E2E8F0'
   },
   locationHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 8,
+    marginBottom: 12,
   },
   locationName: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#333',
-    marginLeft: 8,
+    fontSize: 19,
+    fontWeight: '700',
+    color: '#1E293B',
+    marginLeft: 10,
+    fontFamily: 'Inter-Bold'
   },
   locationAddress: {
-    fontSize: 14,
-    color: '#666',
-    marginBottom: 12,
-    lineHeight: 20,
+    fontSize: 15,
+    color: '#64748B',
+    marginBottom: 15,
+    lineHeight: 22,
+    fontFamily: 'Inter-Regular'
   },
   locationDetails: {
-    marginBottom: 16,
+    marginBottom: 20,
   },
   locationDetail: {
     fontSize: 14,
-    color: '#666',
-    marginBottom: 4,
+    color: '#64748B',
+    marginBottom: 6,
+    fontFamily: 'Inter-Regular'
   },
   detailLabel: {
-    fontWeight: 'bold',
-    color: '#333',
+    fontWeight: '600',
+    color: '#334155',
+    fontFamily: 'Inter-SemiBold'
   },
   mapButton: {
-    backgroundColor: '#007AFF',
+    backgroundColor: '#3B82F6',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 12,
-    borderRadius: 8,
+    paddingVertical: 14,
+    borderRadius: 10,
+    shadowColor: '#3B82F6',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 5
   },
   mapButtonText: {
-    color: '#fff',
+    color: '#FFFFFF',
     fontSize: 16,
-    fontWeight: 'bold',
-    marginLeft: 8,
+    fontWeight: '600',
+    marginLeft: 10,
+    fontFamily: 'Inter-SemiBold'
   },
   tagsContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
+    marginTop: 10
   },
   tagItem: {
-    backgroundColor: '#007AFF',
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 16,
-    marginRight: 8,
-    marginBottom: 8,
+    backgroundColor: '#3B82F6',
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    borderRadius: 20,
+    marginRight: 10,
+    marginBottom: 10,
+    shadowColor: '#3B82F6',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    elevation: 3
   },
   tagText: {
-    color: '#fff',
-    fontSize: 12,
-    fontWeight: 'bold',
+    color: '#FFFFFF',
+    fontSize: 13,
+    fontWeight: '600',
+    fontFamily: 'Inter-SemiBold'
   },
   creatorCard: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#f8f8f8',
-    borderRadius: 8,
-    padding: 16,
+    backgroundColor: '#F1F5F9',
+    borderRadius: 12,
+    padding: 18,
+    borderWidth: 1,
+    borderColor: '#E2E8F0'
   },
   creatorInfo: {
-    marginLeft: 12,
+    marginLeft: 15,
     flex: 1,
   },
   creatorName: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: 4,
+    fontSize: 17,
+    fontWeight: '700',
+    color: '#1E293B',
+    marginBottom: 5,
+    fontFamily: 'Inter-Bold'
   },
   creatorEmail: {
-    fontSize: 14,
-    color: '#666',
+    fontSize: 15,
+    color: '#64748B',
+    fontFamily: 'Inter-Regular'
   },
   enrollmentSection: {
-    marginTop: 20,
+    marginTop: 25,
   },
   enrollmentButton: {
-    backgroundColor: '#4CAF50',
+    backgroundColor: '#10B981',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 16,
-    borderRadius: 12,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
+    paddingVertical: 18,
+    borderRadius: 14,
+    shadowColor: '#10B981',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+    elevation: 6
   },
   cancelButton: {
-    backgroundColor: '#FF6B6B',
+    backgroundColor: '#EF4444',
+    shadowColor: '#EF4444',
   },
   buttonDisabled: {
-    backgroundColor: '#ccc',
+    backgroundColor: '#94A3B8',
+    shadowColor: '#94A3B8',
   },
   enrollmentButtonText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginLeft: 8,
+    color: '#FFFFFF',
+    fontSize: 17,
+    fontWeight: '600',
+    marginLeft: 10,
+    fontFamily: 'Inter-SemiBold'
   },
-}); 
+});

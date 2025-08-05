@@ -22,10 +22,10 @@ export default function login({ navigation }) {
       
       if (response.data.success) {
         Alert.alert(
-          'exito',
+          'Exito',
           [
             {
-              text: 'ok',
+              text: 'Ok',
               onPress: () => navigation.replace('EventsList')
             }
           ]
@@ -94,15 +94,15 @@ export default function login({ navigation }) {
             disabled={loading}
           >
             <Text style={styles.buttonText}>
-              {loading ? 'iniciando sesion' : 'inicar sesi0n'}
+              {loading ? 'Iniciando sesion' : 'Iniciar sesion'}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity 
             style={styles.registerButton}
-            onPress={() => navigation.navigate('Register')}
+            onPress={() => navigation.navigate('register')}
           >
             <Text style={styles.registerText}>
-              ¿No tienes cuenta? <Text style={styles.registerLink}>Regístrate</Text>
+              ¿Tenes cuenta? <Text style={styles.registerLink}>Registrate</Text>
             </Text>
           </TouchableOpacity>
         </View>
@@ -114,27 +114,29 @@ export default function login({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#0F172A',
   },
   content: {
     flex: 1,
     justifyContent: 'center',
-    paddingHorizontal: 20,
+    paddingHorizontal: 25,
   },
   header: {
     alignItems: 'center',
-    marginBottom: 40,
+    marginBottom: 50,
   },
   title: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: '#333',
-    marginTop: 10,
+    fontSize: 32,
+    fontWeight: '800',
+    color: '#FFFFFF',
+    marginTop: 15,
+    fontFamily: 'Inter-ExtraBold'
   },
   subtitle: {
-    fontSize: 16,
-    color: '#666',
-    marginTop: 5,
+    fontSize: 17,
+    color: '#94A3B8',
+    marginTop: 8,
+    fontFamily: 'Inter-Regular'
   },
   form: {
     width: '100%',
@@ -142,65 +144,66 @@ const styles = StyleSheet.create({
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#fff',
-    borderRadius: 12,
-    marginBottom: 16,
-    paddingHorizontal: 15,
+    backgroundColor: '#1E293B',
+    borderRadius: 14,
+    marginBottom: 20,
+    paddingHorizontal: 18,
     shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
-    shadowRadius: 3.84,
-    elevation: 5,
+    shadowRadius: 4,
+    elevation: 3,
+    borderWidth: 1,
+    borderColor: '#334155'
   },
   inputIcon: {
-    marginRight: 10,
+    marginRight: 12,
+    color: '#64748B'
   },
   input: {
     flex: 1,
-    height: 50,
+    height: 55,
     fontSize: 16,
-    color: '#333',
+    color: '#E2E8F0',
+    fontFamily: 'Inter-Regular'
   },
   eyeIcon: {
-    padding: 5,
+    padding: 8,
   },
   button: {
-    backgroundColor: '#007AFF',
-    borderRadius: 12,
-    height: 50,
+    backgroundColor: '#3B82F6',
+    borderRadius: 14,
+    height: 55,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 10,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
+    marginTop: 15,
+    shadowColor: '#3B82F6',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.4,
+    shadowRadius: 6,
+    elevation: 8
   },
   buttonDisabled: {
-    backgroundColor: '#ccc',
+    backgroundColor: '#475569',
   },
   buttonText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: 'bold',
+    color: '#FFFFFF',
+    fontSize: 17,
+    fontWeight: '600',
+    fontFamily: 'Inter-SemiBold'
   },
   registerButton: {
-    marginTop: 20,
+    marginTop: 25,
     alignItems: 'center',
   },
   registerText: {
-    fontSize: 14,
-    color: '#666',
+    fontSize: 15,
+    color: '#94A3B8',
+    fontFamily: 'Inter-Regular'
   },
   registerLink: {
-    color: '#007AFF',
-    fontWeight: 'bold',
+    color: '#3B82F6',
+    fontWeight: '600',
+    fontFamily: 'Inter-SemiBold'
   },
-}); 
+});
