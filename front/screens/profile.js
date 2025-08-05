@@ -8,7 +8,7 @@ import {
   ScrollView
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-export default function ProfileScreen({ navigation }) {
+export default function profile({ navigation }) {
   const [user] = useState({
     name: 'Usuario Demo',
     email: 'usuario@demo.com',

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-export default function AboutScreen() {
+export default function about() {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>DEMO EVENTOS</Text>

@@ -3,7 +3,7 @@ import { View, TextInput, TouchableOpacity, Text, StyleSheet, Alert, KeyboardAvo
 import { MaterialIcons } from '@expo/vector-icons';
 import Message from '../components/msg';
 import api from '../services/api';
-export default function RegisterScreen({ navigation }) {
+export default function register({ navigation }) {
   const [formData, setFormData] = useState({
     first_name: '',
     last_name: '',

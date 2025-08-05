@@ -11,10 +11,10 @@ import {
   Alert
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import Message from '../components/Message';
+import Message from '../components/msg';
 import api from '../services/api';
 
-export default function EventsListScreen({ navigation }) {
+export default function eventslist({ navigation }) {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);

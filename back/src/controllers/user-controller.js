@@ -2,8 +2,8 @@ import pkg from 'pg';
 import bcrypt from 'bcryptjs';
 import { StatusCodes } from 'http-status-codes';
 import config from '../../configs/db-configs.js';
-import { generateToken } from '../../middleware/auth.js';
-import { validaciones } from '../helpers/validaciones/validaciones-helper.js';
+import { generateToken } from '../../middleware/autenticar.js';
+import { validaciones } from '../helpers/validaciones/validaciones.js';
 
 const { Pool } = pkg;
 const pool = new Pool(config);

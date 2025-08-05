@@ -10,10 +10,10 @@ import {
   Linking
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import Message from '../components/Message';
+import Message from '../components/msg';
 import api from '../services/api';
 
-export default function EventDetailScreen({ route, navigation }) {
+export default function eventdetail({ route, navigation }) {
   const { eventId } = route.params;
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);

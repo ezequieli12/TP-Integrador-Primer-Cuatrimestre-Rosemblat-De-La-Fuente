@@ -1,6 +1,6 @@
 import pkg from 'pg';
 import { StatusCodes } from 'http-status-codes';
-import { validaciones } from '../helpers/validaciones/validaciones-helper.js';
+import { validaciones } from '../helpers/validaciones/validaciones.js';
 import config from '../../configs/db-configs.js';
 
 const { Pool } = pkg;

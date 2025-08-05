@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { View, Button, StyleSheet } from 'react-native';
-import Message from '../components/Message';
+import Message from '../components/msg';
 import api from '../services/api';
-export default function HomeScreen({ navigation }) {
+export default function home({ navigation }) {
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
